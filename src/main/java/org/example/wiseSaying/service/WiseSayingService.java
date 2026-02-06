@@ -27,4 +27,9 @@ public class WiseSayingService {
     public boolean delete(int id) {
         return wiseSayingRepository.delete(id);
     }
+
+// Optional로 하면 좋다 Optional<WiseSaying>
+    public WiseSaying findByIdOrNull(int id) {
+        return wiseSayingRepository.findByIdOrNull(id);
+    }
 }
