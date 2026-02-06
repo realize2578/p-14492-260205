@@ -1,5 +1,6 @@
 package org.example.wiseSaying.controller;
 
+import org.example.global.AppContext;
 import org.example.wiseSaying.entity.WiseSaying;
 import org.example.wiseSaying.service.WiseSayingService;
 
@@ -10,8 +11,8 @@ public class WiseSayingController {
     private Scanner sc;
     private WiseSayingService wiseSayingService;
 
-    public WiseSayingController(Scanner sc) {
-        this.sc = sc;
+    public WiseSayingController() {
+        this.sc = AppContext.sc;
         this.wiseSayingService = new WiseSayingService();
     }
 

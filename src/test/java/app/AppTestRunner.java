@@ -1,6 +1,7 @@
 package app;
 
 import org.example.App;
+import org.example.global.AppContext;
 import test.TestUtil;
 
 import java.io.ByteArrayOutputStream;
@@ -14,7 +15,8 @@ public class AppTestRunner {
 
         ByteArrayOutputStream outputStream = TestUtil.setOutByteArray();
 
-        new App(sc).run();
+        AppContext.init(sc);
+        new App().run();
 
         return outputStream.toString();
 
