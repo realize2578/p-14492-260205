@@ -1,5 +1,6 @@
 package org.example.wiseSaying.controller;
 
+import org.example.Rq;
 import org.example.global.AppContext;
 import org.example.wiseSaying.entity.WiseSaying;
 import org.example.wiseSaying.service.WiseSayingService;
@@ -39,6 +40,15 @@ public class WiseSayingController {
                 .stream()
                 .forEach(wiseSaying -> System.out.printf("%d / %s / %s%n",
                         wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getSaying()));
+
+    }
+
+    public void actionDelete(Rq rq) {
+
+        int id = rq.getParamAsInt("id", -1);
+        boolean rst = wiseSayingService.delete(id);
+
+        System.out.println("%d번 명언이 삭제되었습니다.".formatted(id));
 
     }
 }

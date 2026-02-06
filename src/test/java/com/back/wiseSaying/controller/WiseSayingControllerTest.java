@@ -94,6 +94,8 @@ public class WiseSayingControllerTest {
                 목록
                 """);
 
+
+
         assertThat(out)
                 .contains("1번 명언이 삭제되었습니다.")
                 .contains("2 / 작자미상 / 과거에 집착하지 마라.")
