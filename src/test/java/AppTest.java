@@ -22,7 +22,10 @@ public class AppTest {
                         작자미상
                         """);
 
-        assertThat(out).contains("== 명언 앱 ==");
+//        assertThat(out).contains("== 명언 앱 =="); 한번 테스트가 끝난 기능에 대해서는 다시 테스트 하지 않음
+        assertThat(out).contains("명령) ");
+        assertThat(out).contains("명언 : ");
+        assertThat(out).contains("작가 : ");
 
 
     }
