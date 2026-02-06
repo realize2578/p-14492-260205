@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,7 +28,19 @@ public class TestUtilTest {
 
 
     }
+    @Test
+    @DisplayName("TestUtil.setOutByteArray()")
+    public void t2(){
 
+        ByteArrayOutputStream byteArrayOutputStream = TestUtil.setOutByteArray();
+
+        System.out.println("안녕하세요");
+
+        String result = byteArrayOutputStream.toString();
+
+        assertThat(result).contains("안녕하세요"); // 문자열끼리 비교할 땐 contains를 더 많이 쓴다.
+
+    }
 
 
 
