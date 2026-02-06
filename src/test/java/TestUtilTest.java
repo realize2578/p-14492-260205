@@ -10,7 +10,7 @@ public class TestUtilTest {
 
 
     @Test
-    @DisplayName("등록")
+    @DisplayName("TestUtil.genScanner")
     public void t1(){
         Scanner sc = TestUtil.genScanner("""
                 등록
@@ -30,15 +30,21 @@ public class TestUtilTest {
     }
     @Test
     @DisplayName("TestUtil.setOutByteArray()")
-    public void t2(){
+    public void t2() throws Exception {
 
         ByteArrayOutputStream byteArrayOutputStream = TestUtil.setOutByteArray();
 
-        System.out.println("안녕하세요");
+        System.out.println("1 / 이순신 / 나의 죽음을 알리지 마라.");
 
         String result = byteArrayOutputStream.toString();
 
-        assertThat(result).contains("안녕하세요"); // 문자열끼리 비교할 땐 contains를 더 많이 쓴다.
+
+        // 모니터로 확인하고 싶은 시점
+        TestUtil.clearSetOutTOByteArray(byteArrayOutputStream);
+
+        System.out.println(result);
+
+        assertThat(result).contains("1 / 이순신 / 나의 죽음을 알리지 마라."); // 문자열끼리 비교할 땐 contains를 더 많이 쓴다.
 
     }
 
