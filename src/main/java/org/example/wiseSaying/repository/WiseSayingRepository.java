@@ -19,13 +19,6 @@ public class WiseSayingRepository {
         return wiseSaying;
     }
 
-    public List<WiseSaying> findListDesc() {
-        return wiseSayings.reversed()
-                .stream()
-                .limit(5)
-                .toList();
-    }
-
     public boolean delete(int id) {
         return wiseSayings.removeIf(wiseSaying -> wiseSaying.getId() == id);
     }
@@ -39,21 +32,31 @@ public class WiseSayingRepository {
                 .orElse(null);
     }
 
-    public List<WiseSaying> findByContentKeywordOrderByDesc(String keyword) {
+    public List<WiseSaying> findListDesc(int page, int pageSize) {
+        return wiseSayings.reversed()
+                .stream()
+                .skip(page*pageSize)
+                .limit(pageSize)
+                .toList();
+    }
+
+    public List<WiseSaying> findByContentKeywordOrderByDesc(String keyword,int page, int pageSize) {
         return wiseSayings
                 .reversed()
                 .stream()
                 .filter(wiseSaying -> wiseSaying.getSaying().contains(keyword))
-                .limit(5)// 결과가 나온 다음 페이징
+                .skip(page*pageSize)
+                .limit(pageSize)// 결과가 나온 다음 페이징
                 .toList();
     }
 
-    public List<WiseSaying> findByAutherKeywordOrderByDesc(String keyword) {
+    public List<WiseSaying> findByAutherKeywordOrderByDesc(String keyword,int page, int pageSize) {
         return wiseSayings
                 .reversed()
                 .stream()
                 .filter(wiseSaying -> wiseSaying.getAuthor().contains(keyword))
-                .limit(5)
+                .skip(page*pageSize)
+                .limit(pageSize)
                 .toList();
     }
 }
