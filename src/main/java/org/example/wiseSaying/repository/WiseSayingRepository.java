@@ -1,5 +1,6 @@
 package org.example.wiseSaying.repository;
 
+import org.example.wiseSaying.dto.PageDto;
 import org.example.wiseSaying.entity.WiseSaying;
 
 import java.util.ArrayList;
@@ -32,31 +33,42 @@ public class WiseSayingRepository {
                 .orElse(null);
     }
 
-    public List<WiseSaying> findListDesc(int page, int pageSize) {
-        return wiseSayings.reversed()
-                .stream()
-                .skip(page*pageSize)
-                .limit(pageSize)
-                .toList();
+    public PageDto findListDesc(int page, int pageSize) {
+        return pageOf(wiseSayings,page,pageSize);
     }
 
-    public List<WiseSaying> findByContentKeywordOrderByDesc(String keyword,int page, int pageSize) {
-        return wiseSayings
-                .reversed()
+    public PageDto findByContentKeywordOrderByDesc(String keyword,int page, int pageSize) {
+
+
+
+        List<WiseSaying> filteredContent = wiseSayings.reversed()
                 .stream()
-                .filter(wiseSaying -> wiseSaying.getSaying().contains(keyword))
-                .skip(page*pageSize)
-                .limit(pageSize)// 결과가 나온 다음 페이징
+                .filter(w -> w.getSaying().contains(keyword))
+
+
                 .toList();
+        return pageOf(filteredContent,page,pageSize);
     }
 
-    public List<WiseSaying> findByAutherKeywordOrderByDesc(String keyword,int page, int pageSize) {
-        return wiseSayings
+    public PageDto findByAutherKeywordOrderByDesc(String keyword, int page, int pageSize) {
+        List<WiseSaying> filteredContent = wiseSayings
                 .reversed()
                 .stream()
                 .filter(wiseSaying -> wiseSaying.getAuthor().contains(keyword))
-                .skip(page*pageSize)
+                .toList();
+
+        return pageOf(filteredContent,page,pageSize);
+    }
+    private PageDto pageOf(List<WiseSaying> filteredContent, int page, int pageSize){
+        int totalCount = filteredContent.size();
+
+        List<WiseSaying> pagedFilteredContent = filteredContent.reversed()
+                .stream()
+                .skip(page)
                 .limit(pageSize)
                 .toList();
+
+
+        return new PageDto(page,pageSize,totalCount,pagedFilteredContent);
     }
 }

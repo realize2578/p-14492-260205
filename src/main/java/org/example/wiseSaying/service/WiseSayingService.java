@@ -1,6 +1,7 @@
 package org.example.wiseSaying.service;
 
 import org.example.global.AppContext;
+import org.example.wiseSaying.dto.PageDto;
 import org.example.wiseSaying.entity.WiseSaying;
 import org.example.wiseSaying.repository.WiseSayingRepository;
 
@@ -20,7 +21,7 @@ public class WiseSayingService {
         return wiseSaying;
     }
 
-    public List<WiseSaying> findListDesc(String keyword,String keywordType,int page, int pageSize) {
+    public PageDto findListDesc(String keyword, String keywordType, int page, int pageSize) {
 //        return wiseSayingRepository.findListDesc();
         return switch (keywordType){
             case "content" -> wiseSayingRepository.findByContentKeywordOrderByDesc(keyword,page,pageSize);

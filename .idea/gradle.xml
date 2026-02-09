@@ -10,7 +10,7 @@
         <option name="gradleJvm" value="graalvm-jdk-21" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/../../../../프로그래머스/실습/wisesaying/p-14492-260205" />
           </set>
         </option>
       </GradleProjectSettings>

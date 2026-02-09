@@ -2,6 +2,7 @@ package org.example.wiseSaying.controller;
 
 import org.example.Rq;
 import org.example.global.AppContext;
+import org.example.wiseSaying.dto.PageDto;
 import org.example.wiseSaying.entity.WiseSaying;
 import org.example.wiseSaying.service.WiseSayingService;
 
@@ -45,14 +46,14 @@ public class WiseSayingController {
         System.out.println("----------------------");
 
 
-        List<WiseSaying> wiseSayings = wiseSayingService.findListDesc(keyword,keywordType,page,pageSize);
+        PageDto pageDto = wiseSayingService.findListDesc(keyword, keywordType, page, pageSize);
 
-        wiseSayings
-//                .reversed()
+        pageDto.getContent()
                 .stream()
-//                .filter()
                 .forEach(wiseSaying -> System.out.printf("%d / %s / %s%n",
                         wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getSaying()));
+
+
 
     }
 
