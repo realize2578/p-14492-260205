@@ -20,9 +20,13 @@ public class WiseSayingService {
         return wiseSaying;
     }
 
-    public List<WiseSaying> findListDesc(String keyword) {
+    public List<WiseSaying> findListDesc(String keyword,String keywordType) {
 //        return wiseSayingRepository.findListDesc();
-        return wiseSayingRepository.findByKeywordOrderByDesc(keyword);
+        return switch (keywordType){
+            case "content" -> wiseSayingRepository.findByContentKeywordOrderByDesc(keyword);
+            case "author" -> wiseSayingRepository.findByAutherKeywordOrderByDesc(keyword);
+            default -> wiseSayingRepository.findListDesc();
+        };
     }
 
     public boolean delete(int id) {

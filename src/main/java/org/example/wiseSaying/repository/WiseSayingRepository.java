@@ -36,9 +36,16 @@ public class WiseSayingRepository {
                 .orElse(null);
     }
 
-    public List<WiseSaying> findByKeywordOrderByDesc(String keyword) {
+    public List<WiseSaying> findByContentKeywordOrderByDesc(String keyword) {
         return wiseSayings.stream()
                 .filter(wiseSaying -> wiseSaying.getSaying().contains(keyword))
+                .toList()
+                .reversed();
+    }
+
+    public List<WiseSaying> findByAutherKeywordOrderByDesc(String keyword) {
+        return wiseSayings.stream()
+                .filter(wiseSaying -> wiseSaying.getAuthor().contains(keyword))
                 .toList()
                 .reversed();
     }

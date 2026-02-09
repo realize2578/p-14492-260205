@@ -43,7 +43,7 @@ public class WiseSayingController {
         System.out.println("----------------------");
 
 
-        List<WiseSaying> wiseSayings = wiseSayingService.findListDesc(keyword);
+        List<WiseSaying> wiseSayings = wiseSayingService.findListDesc(keyword,keywordType);
 
         wiseSayings
 //                .reversed()
