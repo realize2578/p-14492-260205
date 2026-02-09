@@ -21,6 +21,9 @@ public class Rq {
         Map<String, String> paramMap = new HashMap<>();
 
         String[] cmdBits = cmd.split("\\?");
+        if(cmdBits.length<2){
+            return defaultValue;
+        }
         String queryString = cmdBits[1];
         String[] queryBits = queryString.split("&");
 
