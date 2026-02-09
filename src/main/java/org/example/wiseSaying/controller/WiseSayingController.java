@@ -89,4 +89,6 @@ public class WiseSayingController {
         wiseSayingService.modify(wiseSaying, newSaying, newAuthor);
 
     }
+
+
 }
