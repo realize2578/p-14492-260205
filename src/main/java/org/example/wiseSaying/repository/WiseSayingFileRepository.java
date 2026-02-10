@@ -1,6 +1,7 @@
 package org.example.wiseSaying.repository;
 
 import org.example.standard.util.Util;
+import org.example.wiseSaying.dto.PageDto;
 import org.example.wiseSaying.entity.WiseSaying;
 
 import java.util.List;
@@ -66,5 +67,26 @@ public class WiseSayingFileRepository {
                 .map(Util.json::toMap)
                 .map(WiseSaying::fromMap)
                 .toList();
+    }
+
+    public PageDto findByContentContainingDesc(String keyword, int page, int pageSize) {
+        List<WiseSaying> wiseSayings= findAll().stream()
+                .filter(wiseSaying -> wiseSaying.getSaying().contains(keyword))
+                .toList();
+
+        return  pageOf(wiseSayings,page,pageSize);
+    }
+
+    private PageDto pageOf(List<WiseSaying> filteredContent, int page, int pageSize){
+        int totalCount = filteredContent.size();
+
+        List<WiseSaying> pagedFilteredContent = filteredContent.reversed()
+                .stream()
+                .skip((page-1)*pageSize)
+                .limit(pageSize)
+                .toList();
+
+
+        return new PageDto(page,pageSize,totalCount,pagedFilteredContent);
     }
 }
