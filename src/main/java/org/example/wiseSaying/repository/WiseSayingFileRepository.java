@@ -3,6 +3,7 @@ package org.example.wiseSaying.repository;
 import org.example.standard.util.Util;
 import org.example.wiseSaying.entity.WiseSaying;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -59,6 +60,11 @@ public class WiseSayingFileRepository {
     }
 
 
-
-
+    public List<WiseSaying> findAll() {
+        return Util.file.walkRegularFiles(getDbPath(), "^\\d+\\.json$")
+                .map(path -> Util.file.get(path.toString(),""))
+                .map(Util.json::toMap)
+                .map(WiseSaying::fromMap)
+                .toList();
+    }
 }
