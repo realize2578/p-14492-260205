@@ -1,12 +1,11 @@
 package org.example.wiseSaying.controller;
 
-import org.example.Rq;
+import org.example.global.Rq;
 import org.example.global.AppContext;
 import org.example.wiseSaying.dto.PageDto;
 import org.example.wiseSaying.entity.WiseSaying;
 import org.example.wiseSaying.service.WiseSayingService;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class WiseSayingController {
@@ -33,7 +32,7 @@ public class WiseSayingController {
 
         String keywordType = rq.getParam("keywordType","");
         String keyword = rq.getParam("keyword","");
-        int page = rq.getParamAsInt("page",1)-1;
+        int page = rq.getParamAsInt("page",1);
         int pageSize = rq.getParamAsInt("pageSize",5);
 
         System.out.println("----------------------");

@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TestUtilTest {
+public class TestUtilTestFileTest {
 
 
     @Test

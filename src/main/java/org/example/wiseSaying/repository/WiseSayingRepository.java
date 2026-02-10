@@ -64,7 +64,7 @@ public class WiseSayingRepository {
 
         List<WiseSaying> pagedFilteredContent = filteredContent.reversed()
                 .stream()
-                .skip(page)
+                .skip((page-1)*pageSize)
                 .limit(pageSize)
                 .toList();
 
