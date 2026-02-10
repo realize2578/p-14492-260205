@@ -50,4 +50,8 @@ public class WiseSayingFileRepository {
     public String getDbPass(){
         return "db/wiseSaying";
     }
+
+    public void delete(WiseSaying wiseSaying1) {
+        Util.file.delete("%s/%d.json".formatted(getDbPass(),wiseSaying1.getId()));
+    }
 }
