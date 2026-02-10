@@ -2,6 +2,7 @@ package org.example.global;
 
 import org.example.system.controller.SystemController;
 import org.example.wiseSaying.controller.WiseSayingController;
+import org.example.wiseSaying.repository.WiseSayingFileRepository;
 import org.example.wiseSaying.repository.WiseSayingRepository;
 import org.example.wiseSaying.service.WiseSayingService;
 
@@ -14,10 +15,12 @@ public class AppContext {
     public static WiseSayingController wiseSayingController;
     public static WiseSayingService wiseSayingService;
     public static WiseSayingRepository wiseSayingRepository;
+    public static WiseSayingFileRepository wiseSayingFileRepository;
 
 
     public static void init(Scanner _sc) {
         AppContext.sc = _sc;
+        AppContext.wiseSayingFileRepository = new WiseSayingFileRepository();
         AppContext.wiseSayingRepository = new WiseSayingRepository();
         AppContext.wiseSayingService = new WiseSayingService();
         AppContext.wiseSayingController = new WiseSayingController();
