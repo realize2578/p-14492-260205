@@ -50,7 +50,7 @@ public class WiseSayingRepository {
         return pageOf(filteredContent,page,pageSize);
     }
 
-    public PageDto findByAutherKeywordOrderByDesc(String keyword, int page, int pageSize) {
+    public PageDto findByAuthorKeywordOrderByDesc(String keyword, int page, int pageSize) {
         List<WiseSaying> filteredContent = wiseSayings
                 .reversed()
                 .stream()

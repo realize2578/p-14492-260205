@@ -7,6 +7,8 @@ import org.example.wiseSaying.entity.WiseSaying;
 import org.example.wiseSaying.service.WiseSayingService;
 
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class WiseSayingController {
     private Scanner sc;
@@ -35,14 +37,16 @@ public class WiseSayingController {
         int page = rq.getParamAsInt("page",1);
         int pageSize = rq.getParamAsInt("pageSize",5);
 
-        System.out.println("----------------------");
-        System.out.println("검색타입 : %s".formatted(keywordType));
-        System.out.println("검색어 : %s".formatted(keyword));
-        System.out.println("----------------------");
-
+        if(keyword.isBlank()) {
+            System.out.println("----------------------");
+            System.out.println("검색타입 : %s".formatted(keywordType));
+            System.out.println("검색어 : %s".formatted(keyword));
+            System.out.println("----------------------");
+        }
 
         System.out.println("번호 / 작가 / 명언");
         System.out.println("----------------------");
+
 
 
         PageDto pageDto = wiseSayingService.findListDesc(keyword, keywordType, page, pageSize);
@@ -53,6 +57,14 @@ public class WiseSayingController {
                         wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getSaying()));
 
 
+
+        System.out.print("페이지 : ");
+        String pageMenuStr = IntStream
+                .rangeClosed(1, pageDto.getPageCount())
+                .mapToObj((num) -> num == page ? "[" + num + "] " : String.valueOf(num))
+                .collect(Collectors.joining(" / "));
+
+        System.out.println(pageMenuStr);
 
     }
 

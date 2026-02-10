@@ -5,8 +5,6 @@ import org.example.wiseSaying.dto.PageDto;
 import org.example.wiseSaying.entity.WiseSaying;
 import org.example.wiseSaying.repository.WiseSayingRepository;
 
-import java.util.List;
-
 public class WiseSayingService {
     private WiseSayingRepository wiseSayingRepository;
 
@@ -25,7 +23,7 @@ public class WiseSayingService {
 //        return wiseSayingRepository.findListDesc();
         return switch (keywordType){
             case "content" -> wiseSayingRepository.findByContentKeywordOrderByDesc(keyword,page,pageSize);
-            case "author" -> wiseSayingRepository.findByAutherKeywordOrderByDesc(keyword,page,pageSize);
+            case "author" -> wiseSayingRepository.findByAuthorKeywordOrderByDesc(keyword,page,pageSize);
             default -> wiseSayingRepository.findListDesc(page,pageSize);
         };
     }
