@@ -18,23 +18,26 @@ public class WiseSayingFileRepository {
             wiseSaying.setId(lastId);
             Map<String, Object> wiseSayingMap = wiseSaying.toMap();
             String jsonStr = Util.json.toString(wiseSayingMap);
-            Util.file.set("%s/%d.json".formatted(getDbPass(),wiseSaying.getId()), jsonStr);
-
+            Util.file.set("%s/%d.json".formatted(getDbPath(),wiseSaying.getId()), jsonStr);
+            return wiseSaying;
         }
+
+        String jsonStr = Util.json.toString(wiseSaying.toMap());
+        Util.file.set("%s/%d.json".formatted(getDbPath(), wiseSaying.getId()), jsonStr);
 
         return wiseSaying;
     }
 
     private int getLastId() {
-        return Util.file.getAsInt("%s/lastId.txt".formatted(getDbPass()), 0);
+        return Util.file.getAsInt("%s/lastId.txt".formatted(getDbPath()), 0);
     }
 
     private void increaseLastId() {
-        Util.file.set("%s/lastId.txt".formatted(getDbPass()), String.valueOf(getLastId() + 1));
+        Util.file.set("%s/lastId.txt".formatted(getDbPath()), String.valueOf(getLastId() + 1));
     }
 
     public Optional<WiseSaying> findById(int id) {
-        String jsonStr = Util.file.get("%s/%d.json".formatted(getDbPass(),id), "");
+        String jsonStr = Util.file.get("%s/%d.json".formatted(getDbPath(),id), "");
         if( jsonStr.isBlank()) {
             return Optional.empty();
         }
@@ -44,14 +47,18 @@ public class WiseSayingFileRepository {
     }
 
     public void clear() {
-        Util.file.delete(getDbPass());
+        Util.file.delete(getDbPath());
     }
 
-    public String getDbPass(){
+    public String getDbPath(){
         return "db/wiseSaying";
     }
 
     public void delete(WiseSaying wiseSaying1) {
-        Util.file.delete("%s/%d.json".formatted(getDbPass(),wiseSaying1.getId()));
+        Util.file.delete("%s/%d.json".formatted(getDbPath(),wiseSaying1.getId()));
     }
+
+
+
+
 }
