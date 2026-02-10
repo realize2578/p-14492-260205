@@ -62,6 +62,14 @@ public class Util {
             }
         }
 
+        public static int getAsInt(String filePath, int defaultValue) {
+            try {
+                return Integer.parseInt(Files.readString(getPath(filePath)));
+            } catch (IOException e) {
+                return defaultValue;
+            }
+        }
+
         public static void touch(String filePath) {
             set(filePath, "");
         }
