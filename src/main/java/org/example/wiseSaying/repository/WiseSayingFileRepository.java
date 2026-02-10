@@ -1,10 +1,10 @@
 package org.example.wiseSaying.repository;
 
 import org.example.standard.util.Util;
-import org.example.wiseSaying.controller.WiseSayingController;
 import org.example.wiseSaying.entity.WiseSaying;
 
 import java.util.Map;
+import java.util.Optional;
 
 public class WiseSayingFileRepository {
 
@@ -33,14 +33,14 @@ public class WiseSayingFileRepository {
         Util.file.set("%s/lastId.txt".formatted(getDbPass()), String.valueOf(getLastId() + 1));
     }
 
-    public WiseSaying findByIdOrNull(int id) {
+    public Optional<WiseSaying> findById(int id) {
         String jsonStr = Util.file.get("%s/%d.json".formatted(getDbPass(),id), "");
         if( jsonStr.isBlank()) {
-            return null;
+            return Optional.empty();
         }
 
         Map<String, Object> map = Util.json.toMap(jsonStr);
-        return WiseSaying.fromMap(map);
+        return Optional.of(WiseSaying.fromMap(map));
     }
 
     public void clear() {
