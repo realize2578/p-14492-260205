@@ -5,6 +5,8 @@ import org.example.wiseSaying.dto.PageDto;
 import org.example.wiseSaying.entity.WiseSaying;
 import org.example.wiseSaying.repository.WiseSayingRepository;
 
+import java.util.Optional;
+
 public class WiseSayingService {
     private WiseSayingRepository wiseSayingRepository;
 
@@ -22,19 +24,21 @@ public class WiseSayingService {
     public PageDto findListDesc(String keyword, String keywordType, int page, int pageSize) {
 //        return wiseSayingRepository.findListDesc();
         return switch (keywordType){
-            case "content" -> wiseSayingRepository.findByContentKeywordOrderByDesc(keyword,page,pageSize);
-            case "author" -> wiseSayingRepository.findByAuthorKeywordOrderByDesc(keyword,page,pageSize);
-            default -> wiseSayingRepository.findListDesc(page,pageSize);
+            case "content" -> wiseSayingRepository.findByContentContainingDesc(keyword,page,pageSize);
+            case "author" -> wiseSayingRepository.findByAuthorContainingDesc(keyword,page,pageSize);
+            default -> wiseSayingRepository.findAll(page,pageSize);
         };
     }
 
     public boolean delete(int id) {
-        return wiseSayingRepository.delete(id);
+        Optional<WiseSaying> wiseSayingOp = wiseSayingRepository.findById(id);
+        if(wiseSayingOp.isPresent())return wiseSayingRepository.delete(wiseSayingOp.get());
+        else return false;
     }
 
 // Optional로 하면 좋다 Optional<WiseSaying>
     public WiseSaying findByIdOrNull(int id) {
-        return wiseSayingRepository.findByIdOrNull(id);
+        return wiseSayingRepository.findById(id).orElse(null);
     }
 
     public void modify(WiseSaying wiseSaying, String newSaying, String newAuthor) {
